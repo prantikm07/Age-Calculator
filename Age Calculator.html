@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            box-shadow: -10px -10px 20px rgba(255, 255, 255, 0.9), 10px 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: inset 5px 5px 10px rgba(255, 255, 255, 0.5), inset -5px -5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Proton Age Calculator</h1>
+        <label for="birthdate">Enter your birthdate:
+        </label>
+        <input type="date" id="birthdate">
+        <button onclick="calculateAge()">Calculate Age</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            const currentDate = new Date();
+
+            const ageInMilliseconds = currentDate - birthdate;
+            const ageInSeconds = ageInMilliseconds / 1000;
+            const ageInMinutes = ageInSeconds / 60;
+            const ageInHours = ageInMinutes / 60;
+            const ageInDays = ageInHours / 24;
+            const ageInMonths = ageInDays / 30.4375; // Average days in a month
+            const ageInYears = ageInMonths / 12;
+
+            const age = {
+                years: Math.floor(ageInYears),
+                months: Math.floor(ageInMonths % 12),
+                days: Math.floor(ageInDays % 30.4375)
+            };
+
+            const result = `You are ${age.years} years, ${age.months} months, and ${age.days} days old.`;
+
+            document.getElementById('result').textContent = result;
+        }
+    </script>
+</body>
+
+</html>
